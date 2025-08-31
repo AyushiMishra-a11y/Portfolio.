@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayushi Mishra - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-icon">🚀</span>
+            Ayushi Mishra
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active" onclick="showSection('home')">
+                <i class="fas fa-home"></i> Home
+            </a></li>
+            <li><a href="#about" class="nav-link" onclick="showSection('about')">
+                <i class="fas fa-user"></i> About
+            </a></li>
+            <li><a href="#resume" class="nav-link" onclick="showSection('resume')">
+                <i class="fas fa-file-alt"></i> Resume
+            </a></li>
+            <li><a href="#projects" class="nav-link" onclick="showSection('projects')">
+                <i class="fas fa-code"></i> Projects
+            </a></li>
+            <li><a href="#contact" class="nav-link" onclick="showSection('contact')">
+                <i class="fas fa-envelope"></i> Contact
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-left">
+                <div class="welcome-text">
+                    <span class="sparkle">✨</span> WELCOME TO MY PORTFOLIO <span class="sparkle">✨</span>
+                </div>
+                <h1 class="hero-title">
+                    I'm <span class="highlight">Ayushi</span><br>
+                    <span class="typing-text">Mishra</span>
+                </h1>
+                <div class="role-badge">
+                    <span class="emoji">💻</span>
+                    Full Stack Developer
+                </div>
+                <p class="hero-description">
+                    Detail-oriented Software Developer specializing in creating modern, 
+                    user-focused digital experiences with MERN stack, PHP, and MySQL.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="showSection('projects')">
+                        <i class="fas fa-rocket"></i>
+                        VIEW MY WORK
+                    </button>
+                    <button class="btn-secondary" onclick="showSection('contact')">
+                        <i class="fas fa-paper-plane"></i>
+                        HIRE ME
+                    </button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="profile-container">
+                    <div class="profile-image">
+                        <span class="profile-emoji">👩‍💻</span>
+                        <div class="floating-icons">
+                            <span class="float-icon">⚡</span>
+                            <span class="float-icon">🔥</span>
+                            <span class="float-icon">🚀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-emoji">🌟</span>
+                About Me
+            </h2>
+            
+            <div class="about-content">
+                <div class="about-left">
+                    <div class="profile-card">
+                        <div class="profile-pic">
+                            <span class="pic-emoji">👩‍💻</span>
+                        </div>
+                        <h3>Ayushi Mishra</h3>
+                        <p>Full Stack Developer</p>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Gurugram, Haryana
+                        </div>
+                    </div>
+                    
+                    <!-- Skills with Stars -->
+                    <div class="skills-section">
+                        <h3><span class="emoji">⭐</span> Skills Rating</h3>
+                        <div class="skill-item">
+                            <span class="skill-name">MERN Stack</span>
+                            <div class="stars">
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">☆</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">PHP & MySQL</span>
+                            <div class="stars">
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="stars">
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Responsive Design</span>
+                            <div class="stars">
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">☆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-right">
+                    <p>With experience in full-stack web development and database management, I specialize in creating modern, user-focused digital experiences with clean code and stunning designs.</p>
+                    
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <span class="info-icon">🎓</span>
+                            <div>
+                                <strong>Education</strong>
+                                <p>Master's in Computer Application</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-icon">📧</span>
+                            <div>
+                                <strong>Email</strong>
+                                <p>ayushitmishra@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-icon">📱</span>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>+91 9792846609</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-emoji">📋</span>
+                Resume
+            </h2>
+            
+            <div class="resume-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">💼</div>
+                        <div class="timeline-content">
+                            <h3>Web Development Intern</h3>
+                            <h4>Utsav Foundation, Gurugram</h4>
+                            <span class="date">Jan 2024 – Jul 2024</span>
+                            <p>Developed full-stack NGO website using PHP, JavaScript, and MySQL with secure authentication and RESTful APIs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🎓</div>
+                        <div class="timeline-content">
+                            <h3>Master's in Computer Application</h3>
+                            <h4>Gurukul Kangri University, Haridwar</h4>
+                            <span class="date">2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">📜</div>
+                        <div class="timeline-content">
+                            <h3>Bachelor of Science</h3>
+                            <h4>Dr. RMLA University, Ayodhya</h4>
+                            <span class="date">2019–2022</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-emoji">🚀</span>
+                My Projects
+            </h2>
+            <p class="projects-subtitle">Dynamic projects loaded from GitHub - Updates automatically!</p>
+            
+            <div id="projects-container" class="projects-grid">
+                <div class="loading-animation">
+                    <div class="loading-spinner"></div>
+                    <p>Loading amazing projects...</p>
+                </div>
+            </div>
+            
+            <div class="github-button">
+                <a href="https://github.com/AyushiMishra" target="_blank" class="btn-github">
+                    <span class="emoji">🔗</span>
+                    More projects on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-emoji">📞</span>
+                Contact Me
+            </h2>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>ADDRESS</h3>
+                    <p>Gurugram, Haryana</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>PHONE</h3>
+                    <p>+91 9792846609</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>EMAIL</h3>
+                    <p>ayushitmishra@gmail.com</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📄</div>
+                    <h3>RESUME</h3>
+                    <p><a href="#" target="_blank">Download Resume</a></p>
+                </div>
+            </div>
+            
+            <div class="social-section">
+                <h3>Find me on</h3>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/ayushi-mishra-513953380" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/AyushiMishra" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:ayushitmishra@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
