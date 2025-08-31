@@ -1,6 +1,7 @@
 // Configuration
 const GITHUB_USERNAME = 'AyushiMishra';
-const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
+
+const GITHUB_USERNAME = 'AyushiMishra-a11y'; 
 
 // Global variables
 let allProjects = [];
