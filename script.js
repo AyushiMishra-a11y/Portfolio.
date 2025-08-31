@@ -471,14 +471,17 @@ console.log(`
    - Mobile-responsive design
    - Enhanced sections with certifications
    - Resume download functionality
+   - Fixed mobile navigation
+   - Perfect button centering
    
 📧 Contact: ayushitmishra@gmail.com
-�� LinkedIn: linkedin.com/in/ayushi-mishra-513953380
-�� GitHub: github.com/${GITHUB_USERNAME}
+ LinkedIn: linkedin.com/in/ayushi-mishra-513953380
+ GitHub: github.com/${GITHUB_USERNAME}
 🏆 NPTEL Certifications included
 ⭐ Skills with star ratings
 📋 Complete project experience
 💼 Professional resume section
+📱 Mobile-optimized navigation
 `);
 
 // Test function for debugging
