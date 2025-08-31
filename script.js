@@ -1,20 +1,23 @@
 // Configuration
 const GITHUB_USERNAME = 'AyushiMishra';
+const GITHUB_PROFILE_URL = 'https://github.com/AyushiMishra-a11y';
 
 // Global variables
 let allProjects = [];
 let displayedProjects = 6;
-let currentFilter = 'all';
 
 // Fetch GitHub repositories
 async function fetchGitHubRepos() {
     try {
-        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
+        console.log('Fetching GitHub repositories...');
+        const response = await fetch(`https://api.github.com/users/${https://github.com/AyushiMishra-a11y}/repos?sort=updated&per_page=100`);
+        
         if (!response.ok) {
-            throw new Error('Failed to fetch repositories');
+            throw new Error(`GitHub API error: ${response.status}`);
         }
         
         const repos = await response.json();
+        console.log('Fetched repos:', repos);
         
         // Transform GitHub repos to our project format
         allProjects = repos.map(repo => ({
@@ -28,51 +31,40 @@ async function fetchGitHubRepos() {
             topics: repo.topics || []
         }));
         
-        // Display projects
+        console.log('Processed projects:', allProjects);
+        
+        // Hide loading and show projects
+        hideLoading();
         displayProjects();
         
     } catch (error) {
         console.error('Error fetching GitHub repos:', error);
-        // Fallback to sample projects if GitHub API fails
-        loadSampleProjects();
+        // Show error message
+        showError('Failed to load projects. Please check your internet connection.');
+        hideLoading();
     }
 }
 
-// Load sample projects as fallback
-function loadSampleProjects() {
-    allProjects = [
-        {
-            name: 'MERN-Notes-App',
-            description: 'Full-stack notes management application with JWT authentication',
-            language: 'JavaScript',
-            stars: 5,
-            forks: 2,
-            url: '#',
-            updated: '2024-01-15',
-            topics: ['MERN', 'JWT', 'Authentication']
-        },
-        {
-            name: 'E-Commerce-Platform',
-            description: 'Secure e-commerce platform with PHP and MySQL',
-            language: 'PHP',
-            stars: 8,
-            forks: 3,
-            url: '#',
-            updated: '2024-01-10',
-            topics: ['PHP', 'MySQL', 'E-commerce']
-        },
-        {
-            name: 'Utsav-Foundation-Website',
-            description: 'NGO campaign and donation management platform',
-            language: 'PHP',
-            stars: 12,
-            forks: 5,
-            url: '#',
-            updated: '2024-01-05',
-            topics: ['PHP', 'NGO', 'Donations']
-        }
-    ];
-    displayProjects();
+// Hide loading screen
+function hideLoading() {
+    const loadingSection = document.querySelector('.loading-section');
+    if (loadingSection) {
+        loadingSection.style.display = 'none';
+    }
+}
+
+// Show error message
+function showError(message) {
+    const projectsContainer = document.getElementById('projectsContainer');
+    if (projectsContainer) {
+        projectsContainer.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>${message}</p>
+                <button onclick="fetchGitHubRepos()" class="retry-btn">Retry</button>
+            </div>
+        `;
+    }
 }
 
 // Display projects
@@ -80,8 +72,17 @@ function displayProjects() {
     const projectsContainer = document.getElementById('projectsContainer');
     if (!projectsContainer) return;
     
-    const filteredProjects = filterProjects();
-    const projectsToShow = filteredProjects.slice(0, displayedProjects);
+    if (allProjects.length === 0) {
+        projectsContainer.innerHTML = `
+            <div class="no-projects">
+                <i class="fas fa-folder-open"></i>
+                <p>No projects found. Create your first repository on GitHub!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    const projectsToShow = allProjects.slice(0, displayedProjects);
     
     projectsContainer.innerHTML = projectsToShow.map(project => `
         <div class="project-card">
@@ -109,14 +110,6 @@ function displayProjects() {
     updateLoadMoreButton();
 }
 
-// Filter projects
-function filterProjects() {
-    if (currentFilter === 'all') return allProjects;
-    return allProjects.filter(project => 
-        project.language.toLowerCase() === currentFilter.toLowerCase()
-    );
-}
-
 // Get language color
 function getLanguageColor(language) {
     const colors = {
@@ -142,44 +135,50 @@ function loadMoreProjects() {
     displayProjects();
 }
 
-// Filter by language
-function filterByLanguage(language) {
-    currentFilter = language;
-    displayedProjects = 6;
-    displayProjects();
-    
-    // Update active filter button
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-}
-
 // Update load more button
 function updateLoadMoreButton() {
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     if (!loadMoreBtn) return;
     
-    const filteredProjects = filterProjects();
-    if (displayedProjects >= filteredProjects.length) {
+    if (displayedProjects >= allProjects.length) {
         loadMoreBtn.style.display = 'none';
     } else {
         loadMoreBtn.style.display = 'block';
     }
 }
 
+// Button click handlers
+function viewMyWork() {
+    window.open(GITHUB_PROFILE_URL, '_blank');
+}
+
+function hireMe() {
+    // Open email client
+    window.open('mailto:ayushitmishra@gmail.com?subject=Hiring Inquiry - Portfolio', '_blank');
+}
+
+function viewCompletePortfolio() {
+    window.open(https://github.com/AyushiMishra-a11y, '_blank');
+}
+
+function connectLinkedIn() {
+    window.open('https://linkedin.com/in/ayushi-mishra-513953380', '_blank');
+}
+
+function connectGitHub() {
+    window.open(https://github.com/AyushiMishra-a11y, '_blank');
+}
+
+function connectEmail() {
+    window.open('mailto:ayushitmishra@gmail.com?subject=Portfolio Contact', '_blank');
+}
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, initializing...');
+    
     // Set current time
-    const timeElement = document.getElementById('currentTime');
-    if (timeElement) {
-        const now = new Date();
-        timeElement.textContent = now.toLocaleTimeString('en-US', { 
-            hour: '2-digit', 
-            minute: '2-digit',
-            hour12: false 
-        });
-    }
+    updateTime();
     
     // Fetch GitHub repositories
     fetchGitHubRepos();
@@ -190,14 +189,15 @@ document.addEventListener('DOMContentLoaded', function() {
         loadMoreBtn.addEventListener('click', loadMoreProjects);
     }
     
-    // Add filter button listeners
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => filterByLanguage(e.target.dataset.language));
-    });
+    // Add button click listeners
+    addButtonListeners();
+    
+    // Update time every minute
+    setInterval(updateTime, 60000);
 });
 
-// Update time every minute
-setInterval(() => {
+// Update time
+function updateTime() {
     const timeElement = document.getElementById('currentTime');
     if (timeElement) {
         const now = new Date();
@@ -207,4 +207,41 @@ setInterval(() => {
             hour12: false 
         });
     }
-}, 60000);
+}
+
+// Add button listeners
+function addButtonListeners() {
+    // View My Work button
+    const viewWorkBtn = document.querySelector('.cta-button.primary');
+    if (viewWorkBtn) {
+        viewWorkBtn.addEventListener('click', viewMyWork);
+    }
+    
+    // Hire Me button
+    const hireBtn = document.querySelector('.cta-button.secondary');
+    if (hireBtn) {
+        hireBtn.addEventListener('click', hireMe);
+    }
+    
+    // View Complete Portfolio button
+    const portfolioBtn = document.querySelector('.portfolio-btn');
+    if (portfolioBtn) {
+        portfolioBtn.addEventListener('click', viewCompletePortfolio);
+    }
+    
+    // Social media buttons
+    const linkedinBtn = document.querySelector('.social-btn[data-platform="linkedin"]');
+    if (linkedinBtn) {
+        linkedinBtn.addEventListener('click', connectLinkedIn);
+    }
+    
+    const githubBtn = document.querySelector('.social-btn[data-platform="github"]');
+    if (githubBtn) {
+        githubBtn.addEventListener('click', connectGitHub);
+    }
+    
+    const emailBtn = document.querySelector('.social-btn[data-platform="email"]');
+    if (emailBtn) {
+        emailBtn.addEventListener('click', connectEmail);
+    }
+}
