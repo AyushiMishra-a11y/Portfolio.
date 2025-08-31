@@ -1,76 +1,82 @@
-:root {
-  --bg: #f8f9fa;
-  --bg-2: #ffffff;
-  --card: #f1f3f6;
-  --text: #1a202c;
-  --muted: #4a5568;
-  --accent: #3182ce;
+// Theme Toggle
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+});
+
+// Hero typing animation
+const heroText = document.querySelector('.hero-text');
+const message = "💻 I specialize in creating modern, user-focused digital experiences with clean code and stunning designs.";
+let i = 0;
+function typeHero() {
+  if(i < message.length){
+    heroText.textContent += message.charAt(i);
+    i++;
+    setTimeout(typeHero,50);
+  }
+}
+typeHero();
+
+// Dynamic GitHub Projects
+const projectsContainer = document.getElementById('projects-cards');
+const githubUsername = 'AyushiMishra-a11y';
+const languageFilter = document.getElementById('language-filter');
+const sortFilter = document.getElementById('sort-filter');
+const searchBar = document.getElementById('search-bar');
+let allRepos = [];
+
+async function fetchRepos(){
+  try{
+    const res = await fetch(`https://api.github.com/users/${githubUsername}/repos`);
+    allRepos = await res.json();
+    populateLanguageFilter(allRepos);
+    applyFilters();
+  } catch(err){
+    projectsContainer.innerHTML = `<p>Unable to load projects</p>`;
+    console.error(err);
+  }
 }
 
-/* General Styles */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  scroll-behavior: smooth;
+function populateLanguageFilter(repos){
+  const languages = new Set(repos.map(r=>r.language).filter(Boolean));
+  languages.forEach(lang=>{
+    const option = document.createElement('option');
+    option.value=lang;
+    option.textContent=lang;
+    languageFilter.appendChild(option);
+  });
 }
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: var(--bg-2);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+function renderRepos(repos){
+  projectsContainer.innerHTML='';
+  repos.forEach(repo=>{
+    const card = document.createElement('div');
+    card.className='card';
+    const updated = new Date(repo.updated_at).toLocaleDateString();
+    card.innerHTML=`
+      <h3>${repo.name}</h3>
+      <p>${repo.description||'No description'}</p>
+      <p>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | Updated: ${updated}</p>
+      <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+    `;
+    projectsContainer.appendChild(card);
+  });
 }
 
-nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
-nav a { text-decoration: none; color: var(--text); font-weight: bold; }
-nav a:hover { color: var(--accent); }
-button#theme-toggle { padding:0.5rem 1rem; border:none; border-radius:5px; cursor:pointer; background: var(--accent); color:#fff; }
+// Filter & Sort
+languageFilter.addEventListener('change', applyFilters);
+sortFilter.addEventListener('change', applyFilters);
+searchBar.addEventListener('input', applyFilters);
 
-/* Sections */
-.section { padding:4rem 2rem; text-align:center; }
-.section-title { font-size:2rem; margin-bottom:2rem; }
+function applyFilters(){
+  let filtered=[...allRepos];
+  if(languageFilter.value!=='all') filtered = filtered.filter(r=>r.language===languageFilter.value);
+  const search = searchBar.value.toLowerCase();
+  if(search) filtered = filtered.filter(r=>r.name.toLowerCase().includes(search));
+  if(sortFilter.value==='stars') filtered.sort((a,b)=>b.stargazers_count - a.stargazers_count);
+  else if(sortFilter.value==='forks') filtered.sort((a,b)=>b.forks_count - a.forks_count);
+  else filtered.sort((a,b)=>new Date(b.updated_at)-new Date(a.updated_at));
+  renderRepos(filtered);
+}
 
-/* Hero */
-.hero { background: var(--accent); color: #fff; padding:6rem 2rem; }
-.hero .resume-btn { display:inline-block; padding:0.75rem 1.5rem; background:#fff; color:var(--accent); border-radius:5px; text-decoration:none; margin-top:1rem; }
-
-/* Skills */
-.skills-container { max-width:600px; margin:auto; text-align:left; }
-.skill { margin-bottom:1rem; }
-.skill p { margin:0 0.5rem 0.3rem 0; }
-.skill-bar { background:#ddd; height:20px; border-radius:10px; overflow:hidden; }
-.skill-bar span { display:block; height:100%; background:var(--accent); width:0; animation: fillSkill 1s forwards; }
-@keyframes fillSkill { to { width: var(--fill); } }
-
-/* About */
-.about-container { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; justify-content:center; text-align:left; max-width:900px; margin:auto; }
-.profile-img { width:200px; border-radius:50%; }
-.about-text ul { list-style:none; padding:0; }
-
-/* Resume */
-.resume-container { max-width:800px; margin:auto; text-align:left; }
-
-/* Projects */
-.controls { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
-.controls input, .controls select { padding:0.5rem 1rem; border-radius:5px; border:1px solid #ccc; font-size:1rem; }
-.cards { display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; }
-.card { background:var(--card); padding:2rem; border-radius:12px; min-width:250px; max-width:300px; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s; }
-.card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,0.2); }
-
-/* Contact */
-.contact-container { max-width:600px; margin:auto; }
-
-/* Footer */
-footer { text-align:center; padding:2rem; background:var(--bg-2); color:var(--muted); }
-
-/* Responsive */
-@media(max-width:768px) { .about-container { flex-direction:column; text-align:center; } .cards { flex-direction:column; } nav ul { flex-direction:column; gap:1rem; } }
+fetchRepos();
