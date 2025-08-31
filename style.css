@@ -673,7 +673,46 @@ body {
         padding: 100px 1rem 2rem;
     }
 }
+/* Add this to your CSS file */
+.resume-download {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
 
+.resume-download h3 {
+    color: #00d4ff;
+    margin-bottom: 1.5rem;
+}
+
+.btn-resume-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #00d4ff, #0099cc);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.btn-resume-download:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+    background: linear-gradient(45deg, #0099cc, #00d4ff);
+}
+
+.resume-note {
+    margin-top: 1rem;
+    color: #cccccc;
+    font-size: 0.9rem;
+}
 /* Container */
 .container {
     max-width: 1200px;
