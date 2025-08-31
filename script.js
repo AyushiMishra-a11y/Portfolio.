@@ -1,7 +1,7 @@
 // Configuration
 const GITHUB_USERNAME = 'AyushiMishra';
 
-const GITHUB_USERNAME = 'AyushiMishra-a11y'; 
+const GITHUB_USERNAME = 'https://github.com/AyushiMishra-a11y'; 
 
 // Global variables
 let allProjects = [];
