@@ -1,7 +1,6 @@
 // Configuration
-const GITHUB_USERNAME = 'AyushiMishra';
-
-const GITHUB_USERNAME = 'https://github.com/AyushiMishra-a11y'; 
+const GITHUB_USERNAME = 'AyushiMishra-a11y'; // Updated to your correct username
+const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
 
 // Global variables
 let allProjects = [];
@@ -9,7 +8,7 @@ let currentSection = 'home';
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Portfolio loaded successfully! 🚀');
+    console.log('🚀 Ayushi Mishra Portfolio loaded successfully!');
     
     // Initialize all functionality
     initializeNavigation();
@@ -19,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show home section by default
     showSection('home');
+    
+    // Check URL hash on load
+    if (window.location.hash) {
+        const section = window.location.hash.substring(1);
+        showSection(section);
+    }
 });
 
 // Navigation functionality
@@ -40,15 +45,19 @@ function initializeNavigation() {
 
 // Show different sections
 function showSection(sectionName) {
+    console.log(`Switching to ${sectionName} section...`);
+    
     // Hide all sections
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
         section.classList.remove('active');
+        section.style.display = 'none';
     });
     
     // Show selected section
     const targetSection = document.getElementById(sectionName);
     if (targetSection) {
+        targetSection.style.display = 'block';
         targetSection.classList.add('active');
         currentSection = sectionName;
         
@@ -57,11 +66,46 @@ function showSection(sectionName) {
         targetSection.offsetHeight; // Trigger reflow
         targetSection.style.animation = 'fadeInUp 0.8s ease-out';
         
-        console.log(`Switched to ${sectionName} section ✨`);
+        console.log(`✅ Now showing ${sectionName} section!`);
+        
+        // Special handling for projects section
+        if (sectionName === 'projects') {
+            // Refresh projects when visiting this section
+            setTimeout(() => {
+                fetchGitHubProjects();
+            }, 500);
+        }
+        
+        // Special handling for resume section
+        if (sectionName === 'resume') {
+            // Add animation to resume elements
+            animateResumeElements();
+        }
+        
+        // Special handling for about section
+        if (sectionName === 'about') {
+            // Animate skills and certifications
+            animateAboutElements();
+        }
     }
     
     // Update URL hash
     window.location.hash = sectionName;
+    
+    // Update navigation active state
+    updateNavigationActive(sectionName);
+}
+
+// Update navigation active state
+function updateNavigationActive(activeSection) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${activeSection}` || 
+            link.getAttribute('data-section') === activeSection) {
+            link.classList.add('active');
+        }
+    });
 }
 
 // Initialize skill stars with animation
@@ -82,6 +126,74 @@ function initializeSkillStars() {
     });
 }
 
+// Animate resume elements
+function animateResumeElements() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const projectItems = document.querySelectorAll('.project-item');
+    
+    // Animate timeline items
+    timelineItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = 'all 0.6s ease';
+            
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, 100);
+        }, index * 300);
+    });
+    
+    // Animate project items
+    projectItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 100);
+        }, index * 200);
+    });
+}
+
+// Animate about elements
+function animateAboutElements() {
+    const certItems = document.querySelectorAll('.cert-item');
+    const infoCards = document.querySelectorAll('.info-card');
+    
+    // Animate certification items
+    certItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(30px)';
+            item.style.transition = 'all 0.6s ease';
+            
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, 100);
+        }, index * 200);
+    });
+    
+    // Animate info cards
+    infoCards.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.6s ease';
+            
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 100);
+        }, index * 150);
+    });
+}
+
 // Fetch GitHub projects dynamically
 async function fetchGitHubProjects() {
     const projectsContainer = document.getElementById('projects-container');
@@ -92,7 +204,7 @@ async function fetchGitHubProjects() {
     }
     
     try {
-        console.log('Fetching projects from GitHub... 📡');
+        console.log('📡 Fetching projects from GitHub...');
         
         const response = await fetch(GITHUB_API_URL);
         
@@ -101,7 +213,7 @@ async function fetchGitHubProjects() {
         }
         
         const repos = await response.json();
-        console.log(`Found ${repos.length} repositories on GitHub! 🎉`);
+        console.log(`🎉 Found ${repos.length} repositories on GitHub!`);
         
         // Transform GitHub repos to our project format
         allProjects = repos.map(repo => ({
@@ -124,7 +236,7 @@ async function fetchGitHubProjects() {
         displayProjectsWithAnimation();
         
     } catch (error) {
-        console.error('Error fetching GitHub projects:', error);
+        console.error('❌ Error fetching GitHub projects:', error);
         showFallbackProjects();
     }
 }
@@ -137,6 +249,21 @@ function displayProjectsWithAnimation() {
     
     // Clear loading
     container.innerHTML = '';
+    
+    if (allProjects.length === 0) {
+        container.innerHTML = `
+            <div class="no-projects">
+                <div class="no-projects-icon">📁</div>
+                <h3>No projects found</h3>
+                <p>Create your first repository on GitHub to see it here!</p>
+                <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" class="btn-github">
+                    <i class="fab fa-github"></i>
+                    Visit GitHub Profile
+                </a>
+            </div>
+        `;
+        return;
+    }
     
     // Show projects one by one with animation
     allProjects.forEach((project, index) => {
@@ -255,7 +382,7 @@ function showFallbackProjects() {
             language: 'JavaScript',
             stars: 5,
             forks: 2,
-            url: 'https://github.com/AyushiMishra',
+            url: 'https://github.com/AyushiMishra-a11y',
             updated: '2024-01-15',
             topics: ['MERN', 'JWT', 'Authentication'],
             size: 150,
@@ -267,7 +394,7 @@ function showFallbackProjects() {
             language: 'PHP',
             stars: 8,
             forks: 3,
-            url: 'https://github.com/AyushiMishra',
+            url: 'https://github.com/AyushiMishra-a11y',
             updated: '2024-01-10',
             topics: ['PHP', 'MySQL', 'E-commerce'],
             size: 200,
@@ -279,7 +406,7 @@ function showFallbackProjects() {
             language: 'PHP',
             stars: 12,
             forks: 5,
-            url: 'https://github.com/AyushiMishra',
+            url: 'https://github.com/AyushiMishra-a11y',
             updated: '2024-01-05',
             topics: ['PHP', 'NGO', 'Donations'],
             size: 180,
@@ -309,7 +436,7 @@ function initializeAnimations() {
     }, observerOptions);
     
     // Observe all animated elements
-    const animatedElements = document.querySelectorAll('.skill-item, .timeline-item, .contact-card');
+    const animatedElements = document.querySelectorAll('.skill-item, .timeline-item, .contact-card, .cert-item, .info-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -320,7 +447,7 @@ function initializeAnimations() {
 // Auto-refresh projects every 30 minutes
 setInterval(() => {
     if (currentSection === 'projects') {
-        console.log('Auto-refreshing projects... 🔄');
+        console.log('🔄 Auto-refreshing projects...');
         fetchGitHubProjects();
     }
 }, 30 * 60 * 1000);
@@ -348,14 +475,24 @@ document.addEventListener('click', function(e) {
     if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
         createRippleEffect(e);
     }
+    
+    // Create ripple effect on links
+    if (e.target.tagName === 'A' || e.target.closest('a')) {
+        createRippleEffect(e);
+    }
 });
 
 // Create ripple effect
 function createRippleEffect(event) {
-    const button = event.target.tagName === 'BUTTON' ? event.target : event.target.closest('button');
+    const element = event.target.tagName === 'BUTTON' ? event.target : 
+                   event.target.tagName === 'A' ? event.target : 
+                   event.target.closest('button') || event.target.closest('a');
+    
+    if (!element) return;
+    
     const ripple = document.createElement('span');
     
-    const rect = button.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = event.clientX - rect.left - size / 2;
     const y = event.clientY - rect.top - size / 2;
@@ -365,7 +502,7 @@ function createRippleEffect(event) {
     ripple.style.top = y + 'px';
     ripple.classList.add('ripple');
     
-    button.appendChild(ripple);
+    element.appendChild(ripple);
     
     setTimeout(() => {
         ripple.remove();
@@ -391,9 +528,30 @@ style.textContent = `
         }
     }
     
-    button {
+    button, a {
         position: relative;
         overflow: hidden;
+    }
+    
+    .no-projects {
+        text-align: center;
+        padding: 3rem;
+    }
+    
+    .no-projects-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: bounce 2s infinite;
+    }
+    
+    .no-projects h3 {
+        color: #00d4ff;
+        margin-bottom: 1rem;
+    }
+    
+    .no-projects p {
+        color: #cccccc;
+        margin-bottom: 2rem;
     }
 `;
 document.head.appendChild(style);
@@ -402,12 +560,18 @@ document.head.appendChild(style);
 console.log(`
 🚀 Welcome to Ayushi Mishra's Portfolio!
 ✨ Features:
-   - Dynamic GitHub integration
-   - Smooth animations
+   - Dynamic GitHub integration (${GITHUB_USERNAME})
+   - Smooth animations and transitions
    - Interactive navigation
    - Auto-updating projects
    - Responsive design
+   - Enhanced sections with certifications
+   - Resume download functionality
    
 📧 Contact: ayushitmishra@gmail.com
-🔗 GitHub: https://github.com/AyushiMishra
+�� LinkedIn: linkedin.com/in/ayushi-mishra-513953380
+�� GitHub: github.com/${GITHUB_USERNAME}
+🏆 NPTEL Certifications included
+⭐ Skills with star ratings
+📋 Complete project experience
 `);
