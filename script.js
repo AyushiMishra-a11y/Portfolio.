@@ -1,147 +1,76 @@
-// --------------------
-// Theme Toggle
-// --------------------
-const themeToggle = document.getElementById('theme-toggle');
-const root = document.documentElement;
-
-const lightTheme = {
-  '--bg': '#f8f9fa',
-  '--bg-2': '#ffffff',
-  '--card': '#f1f3f6',
-  '--text': '#1a202c',
-  '--muted': '#4a5568',
-  '--accent': '#3182ce'
-};
-
-const darkTheme = {
-  '--bg': '#121212',
-  '--bg-2': '#1e1e1e',
-  '--card': '#2c2c2c',
-  '--text': '#f0f0f0',
-  '--muted': '#b0b0b0',
-  '--accent': '#63b3ed'
-};
-
-function applyTheme(theme){
-  Object.entries(theme).forEach(([k,v]) => root.style.setProperty(k,v));
+:root {
+  --bg: #f8f9fa;
+  --bg-2: #ffffff;
+  --card: #f1f3f6;
+  --text: #1a202c;
+  --muted: #4a5568;
+  --accent: #3182ce;
 }
 
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  if(document.body.classList.contains('dark-theme')){
-    applyTheme(darkTheme);
-  } else {
-    applyTheme(lightTheme);
-  }
-});
-
-// --------------------
-// Animated Hero Text
-// --------------------
-const heroText = document.querySelector('.hero p');
-const heroMessage = "Building scalable, modern, and user-friendly applications.";
-let index = 0;
-function typeHero() {
-  if(index < heroMessage.length){
-    heroText.textContent += heroMessage.charAt(index);
-    index++;
-    setTimeout(typeHero, 50);
-  }
-}
-heroText.textContent = "";
-typeHero();
-
-// --------------------
-// Fetch GitHub Repos with Filter, Sort & Search
-// --------------------
-const projectsContainer = document.getElementById('projects-cards');
-const githubUsername = 'AyushiMishra-a11y';
-const languageFilter = document.getElementById('language-filter');
-const sortFilter = document.getElementById('sort-filter');
-const searchBar = document.getElementById('search-bar');
-
-let allRepos = [];
-
-async function fetchRepos() {
-  try {
-    const response = await fetch(`https://api.github.com/users/${githubUsername}/repos`);
-    allRepos = await response.json();
-
-    populateLanguageFilter(allRepos);
-    applyFilters();
-
-  } catch (err) {
-    projectsContainer.innerHTML = `<p>Unable to load projects at this time.</p>`;
-    console.error(err);
-  }
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
-function populateLanguageFilter(repos) {
-  const languages = new Set(repos.map(r => r.language).filter(Boolean));
-  languages.forEach(lang => {
-    const option = document.createElement('option');
-    option.value = lang;
-    option.textContent = lang;
-    languageFilter.appendChild(option);
-  });
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--bg-2);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-function renderRepos(repos) {
-  projectsContainer.innerHTML = '';
-  repos.forEach(repo => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    const updatedDate = new Date(repo.updated_at).toLocaleDateString();
-    card.innerHTML = `
-      <h3>${repo.name}</h3>
-      <p>${repo.description || 'No description provided.'}</p>
-      <p class="repo-stats">⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | Updated: ${updatedDate}</p>
-      <p><a href="${repo.html_url}" target="_blank">View on GitHub</a></p>
-    `;
-    projectsContainer.appendChild(card);
-  });
-}
+nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+nav a { text-decoration: none; color: var(--text); font-weight: bold; }
+nav a:hover { color: var(--accent); }
+button#theme-toggle { padding:0.5rem 1rem; border:none; border-radius:5px; cursor:pointer; background: var(--accent); color:#fff; }
 
-// --------------------
-// Apply Filters, Sort, Search
-// --------------------
-languageFilter.addEventListener('change', applyFilters);
-sortFilter.addEventListener('change', applyFilters);
-searchBar.addEventListener('input', applyFilters);
+/* Sections */
+.section { padding:4rem 2rem; text-align:center; }
+.section-title { font-size:2rem; margin-bottom:2rem; }
 
-function applyFilters() {
-  let filtered = [...allRepos];
+/* Hero */
+.hero { background: var(--accent); color: #fff; padding:6rem 2rem; }
+.hero .resume-btn { display:inline-block; padding:0.75rem 1.5rem; background:#fff; color:var(--accent); border-radius:5px; text-decoration:none; margin-top:1rem; }
 
-  // Filter by language
-  const lang = languageFilter.value;
-  if(lang !== 'all') filtered = filtered.filter(r => r.language === lang);
+/* Skills */
+.skills-container { max-width:600px; margin:auto; text-align:left; }
+.skill { margin-bottom:1rem; }
+.skill p { margin:0 0.5rem 0.3rem 0; }
+.skill-bar { background:#ddd; height:20px; border-radius:10px; overflow:hidden; }
+.skill-bar span { display:block; height:100%; background:var(--accent); width:0; animation: fillSkill 1s forwards; }
+@keyframes fillSkill { to { width: var(--fill); } }
 
-  // Search by name
-  const searchTerm = searchBar.value.toLowerCase();
-  if(searchTerm) filtered = filtered.filter(r => r.name.toLowerCase().includes(searchTerm));
+/* About */
+.about-container { display:flex; flex-wrap:wrap; gap:2rem; align-items:center; justify-content:center; text-align:left; max-width:900px; margin:auto; }
+.profile-img { width:200px; border-radius:50%; }
+.about-text ul { list-style:none; padding:0; }
 
-  // Sort
-  const sort = sortFilter.value;
-  if(sort === 'stars') filtered.sort((a,b) => b.stargazers_count - a.stargazers_count);
-  else if(sort === 'forks') filtered.sort((a,b) => b.forks_count - a.forks_count);
-  else filtered.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at));
+/* Resume */
+.resume-container { max-width:800px; margin:auto; text-align:left; }
 
-  renderRepos(filtered);
-}
+/* Projects */
+.controls { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
+.controls input, .controls select { padding:0.5rem 1rem; border-radius:5px; border:1px solid #ccc; font-size:1rem; }
+.cards { display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; }
+.card { background:var(--card); padding:2rem; border-radius:12px; min-width:250px; max-width:300px; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s; }
+.card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,0.2); }
 
-// Initial fetch
-fetchRepos();
+/* Contact */
+.contact-container { max-width:600px; margin:auto; }
 
-// --------------------
-// Scroll Animation
-// --------------------
-const sections = document.querySelectorAll('.section');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-}, {threshold: 0.2});
-sections.forEach(sec => observer.observe(sec));
+/* Footer */
+footer { text-align:center; padding:2rem; background:var(--bg-2); color:var(--muted); }
 
+/* Responsive */
+@media(max-width:768px) { .about-container { flex-direction:column; text-align:center; } .cards { flex-direction:column; } nav ul { flex-direction:column; gap:1rem; } }
