@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,75 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader">
-            <div class="spinner"></div>
-            <h2>Loading Portfolio...</h2>
-        </div>
-    </div>
-
-    <!-- Status Bar -->
-    <div class="status-bar">
-        <div class="status-left">
-            <span id="currentTime">11:44</span>
-            <i class="fas fa-clock"></i>
-        </div>
-        <div class="status-right">
-            <span>NR</span>
-            <i class="fas fa-wifi"></i>
-            <i class="fas fa-signal"></i>
-            <i class="fas fa-battery-three-quarters"></i>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-        <h1 class="logo">Ayushi Mishra</h1>
-        <div class="menu-btn" id="menuBtn">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-          
-...
-
-Let me reevaluate and take a different approach.
-
-_(It may take a moment for the assistant to restart.)_
-
-
-
-_(It may take a moment for the assistant to restart.)_
-
-
-
-_(It may take a moment for the assistant to restart.)_
-
-
-
-I'll create completely new, fresh code for your dynamic portfolio. Here are three brand new files:
-
-```html:index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayushi Mishra - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader">
-            <div class="spinner"></div>
-            <h2>Loading Portfolio...</h2>
-        </div>
-    </div>
-
     <!-- Status Bar -->
     <div class="status-bar">
         <div class="status-left">
@@ -138,11 +70,11 @@ I'll create completely new, fresh code for your dynamic portfolio. Here are thre
                     code and stunning designs using MERN stack, PHP, and MySQL.
                 </p>
                 <div class="action-buttons">
-                    <button class="btn primary-btn" onclick="navigateToSection('projects')">
+                    <button class="btn primary-btn" onclick="scrollToSection('projects')">
                         <i class="fas fa-laptop-code"></i>
                         VIEW MY WORK
                     </button>
-                    <button class="btn secondary-btn" onclick="navigateToSection('contact')">
+                    <button class="btn secondary-btn" onclick="scrollToSection('contact')">
                         <i class="fas fa-envelope"></i>
                         HIRE ME
                     </button>
@@ -159,21 +91,21 @@ I'll create completely new, fresh code for your dynamic portfolio. Here are thre
                 </h2>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <h3 id="repoCount">-</h3>
+                        <h3 id="repoCount">10</h3>
                         <p>Repositories</p>
                     </div>
                     <div class="stat-item">
-                        <h3 id="followerCount">-</h3>
+                        <h3 id="followerCount">5</h3>
                         <p>Followers</p>
                     </div>
                     <div class="stat-item">
-                        <h3 id="followingCount">-</h3>
+                        <h3 id="followingCount">15</h3>
                         <p>Following</p>
                     </div>
                 </div>
                 <div class="profile-summary">
-                    <h3 id="gitName">Ayushi Mishra</h3>
-                    <p id="gitBio">Full Stack Developer passionate about creating innovative web solutions</p>
+                    <h3>Ayushi Mishra</h3>
+                    <p>Full Stack Developer passionate about creating innovative web solutions</p>
                     <div class="profile-meta">
                         <span class="location">
                             <i class="fas fa-map-marker-alt"></i>
@@ -196,20 +128,17 @@ I'll create completely new, fresh code for your dynamic portfolio. Here are thre
                     My Projects
                 </h2>
                 <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All</button>
-                    <button class="filter-tab" data-filter="javascript">JavaScript</button>
-                    <button class="filter-tab" data-filter="php">PHP</button>
-                    <button class="filter-tab" data-filter="html">HTML</button>
-                    <button class="filter-tab" data-filter="css">CSS</button>
+                    <button class="filter-tab active" onclick="filterProjects('all')">All</button>
+                    <button class="filter-tab" onclick="filterProjects('javascript')">JavaScript</button>
+                    <button class="filter-tab" onclick="filterProjects('php')">PHP</button>
+                    <button class="filter-tab" onclick="filterProjects('html')">HTML</button>
+                    <button class="filter-tab" onclick="filterProjects('css')">CSS</button>
                 </div>
                 <div class="projects-grid" id="projectsGrid">
-                    <div class="loading-projects">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading projects...</p>
-                    </div>
+                    <!-- Projects will be loaded here -->
                 </div>
                 <div class="load-more-section">
-                    <button class="btn primary-btn" id="loadMoreBtn" style="display: none;">
+                    <button class="btn primary-btn" id="loadMoreBtn" onclick="loadMoreProjects()" style="display: none;">
                         <i class="fas fa-plus"></i>
                         Load More Projects
                     </button>
@@ -379,7 +308,7 @@ I'll create completely new, fresh code for your dynamic portfolio. Here are thre
                     </div>
                 </div>
                 
-                <button class="cta-button" onclick="openGitHubProfile()">
+                <button class="cta-button" onclick="openGitHub()">
                     View Complete Portfolio on GitHub
                 </button>
             </div>
@@ -394,7 +323,7 @@ I'll create completely new, fresh code for your dynamic portfolio. Here are thre
         <button class="nav-button home-button" onclick="goToTop()">
             <i class="fas fa-home"></i>
         </button>
-        <button class="nav-button" onclick="toggleMobileMenu()">
+        <button class="nav-button" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
