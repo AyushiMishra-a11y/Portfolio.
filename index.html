@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,329 +6,54 @@
     <title>Ayushi Mishra - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Status Bar -->
-    <div class="status-bar">
-        <div class="status-left">
-            <span id="currentTime">11:44</span>
-            <i class="fas fa-clock"></i>
+   
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>AYUSHI MISHRA</h1>
+        <p>Full Stack Developer</p>
+        <p>Gurugram, Haryana | ayushitmishra@gmail.com</p>
+        
+        <div class="buttons">
+            <button onclick="window.open('https://github.com/AyushiMishra', '_blank')">
+                VIEW MY WORK
+            </button>
+            <button onclick="window.open('mailto:ayushitmishra@gmail.com', '_blank')">
+                HIRE ME
+            </button>
         </div>
-        <div class="status-right">
-            <span>5G</span>
-            <i class="fas fa-wifi"></i>
-            <i class="fas fa-signal"></i>
-            <i class="fas fa-battery-full"></i>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects">
+        <h2>My Projects</h2>
+        <div id="projects-container">
+            Loading projects...
         </div>
-    </div>
+    </section>
 
-    <!-- Header -->
-    <header class="header">
-        <h1 class="logo">Ayushi Mishra</h1>
-        <div class="menu-btn" id="menuBtn">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <span class="menu-text">MENU</span>
+    <!-- Contact -->
+    <section class="contact">
+        <h2>Connect with me</h2>
+        <div class="social-links">
+            <button onclick="window.open('https://linkedin.com/in/ayushi-mishra-513953380', '_blank')">
+                <i class="fab fa-linkedin"></i>
+            </button>
+            <button onclick="window.open('https://github.com/AyushiMishra', '_blank')">
+                <i class="fab fa-github"></i>
+            </button>
+            <button onclick="window.open('mailto:ayushitmishra@gmail.com', '_blank')">
+                <i class="fas fa-envelope"></i>
+            </button>
         </div>
-    </header>
-
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav">
-        <ul class="nav-list">
-            <li><a href="#home" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero-section" id="home">
-            <div class="profile-container">
-                <div class="profile-picture">
-                    <img id="profileImg" src="https://via.placeholder.com/300x400/FF6B6B/ffffff?text=Ayushi+M" alt="Ayushi Mishra">
-                </div>
-            </div>
-            
-            <div class="hero-content">
-                <p class="greeting">WELCOME TO MY PORTFOLIO</p>
-                <h1 class="name-title">I'm <span class="highlight-name">Ayushi Mishra</span></h1>
-                <div class="profession">
-                    <i class="fas fa-code"></i>
-                    <span>Full Stack Developer</span>
-                </div>
-                <p class="bio">
-                    I specialize in creating modern, user-focused digital experiences with clean 
-                    code and stunning designs using MERN stack, PHP, and MySQL.
-                </p>
-                <div class="action-buttons">
-                    <button class="btn primary-btn" onclick="scrollToSection('projects')">
-                        <i class="fas fa-laptop-code"></i>
-                        VIEW MY WORK
-                    </button>
-                    <button class="btn secondary-btn" onclick="scrollToSection('contact')">
-                        <i class="fas fa-envelope"></i>
-                        HIRE ME
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- GitHub Stats Section -->
-        <section class="stats-section" id="about">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fab fa-github"></i>
-                    GitHub Overview
-                </h2>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3 id="repoCount">10</h3>
-                        <p>Repositories</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 id="followerCount">5</h3>
-                        <p>Followers</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 id="followingCount">15</h3>
-                        <p>Following</p>
-                    </div>
-                </div>
-                <div class="profile-summary">
-                    <h3 id="githubName">Ayushi Mishra</h3>
-                    <p id="githubBio">Full Stack Developer passionate about creating innovative web solutions</p>
-                    <div class="profile-meta">
-                        <span class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span id="githubLocation">Gurugram, Haryana</span>
-                        </span>
-                        <span class="company">
-                            <i class="fas fa-building"></i>
-                            <span id="githubCompany">Freelancer</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="projects-section" id="projects">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fab fa-github"></i>
-                    My Projects
-                </h2>
-                <div class="filter-tabs">
-                    <button class="filter-tab active" onclick="filterProjects('all', this)">All</button>
-                    <button class="filter-tab" onclick="filterProjects('javascript', this)">JavaScript</button>
-                    <button class="filter-tab" onclick="filterProjects('php', this)">PHP</button>
-                    <button class="filter-tab" onclick="filterProjects('html', this)">HTML</button>
-                    <button class="filter-tab" onclick="filterProjects('css', this)">CSS</button>
-                </div>
-                <div class="projects-grid" id="projectsGrid">
-                    <div class="loading-message">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading your GitHub repositories...</p>
-                    </div>
-                </div>
-                <div class="load-more-section">
-                    <button class="btn primary-btn" id="loadMoreBtn" onclick="loadMoreProjects()" style="display: none;">
-                        <i class="fas fa-plus"></i>
-                        Load More Projects
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="skills-section" id="skills">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fas fa-tools"></i>
-                    Technical Skills
-                </h2>
-                <div class="skills-categories">
-                    <div class="skill-group">
-                        <h3>Programming Languages</h3>
-                        <div class="skill-items">
-                            <span class="skill-badge">JavaScript</span>
-                            <span class="skill-badge">PHP</span>
-                            <span class="skill-badge">HTML5</span>
-                            <span class="skill-badge">CSS3</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Frameworks & Libraries</h3>
-                        <div class="skill-items">
-                            <span class="skill-badge">React.js</span>
-                            <span class="skill-badge">Node.js</span>
-                            <span class="skill-badge">Express.js</span>
-                            <span class="skill-badge">Bootstrap</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Databases</h3>
-                        <div class="skill-items">
-                            <span class="skill-badge">MongoDB</span>
-                            <span class="skill-badge">MySQL</span>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Tools & Technologies</h3>
-                        <div class="skill-items">
-                            <span class="skill-badge">Git</span>
-                            <span class="skill-badge">GitHub</span>
-                            <span class="skill-badge">VS Code</span>
-                            <span class="skill-badge">Postman</span>
-                            <span class="skill-badge">JWT</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section class="education-section">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fas fa-graduation-cap"></i>
-                    Education
-                </h2>
-                <div class="education-timeline">
-                    <div class="education-card">
-                        <div class="year-badge">2024</div>
-                        <h3>Master's in Computer Application</h3>
-                        <p>Gurukul Kangri (Deemed University), Haridwar</p>
-                    </div>
-                    <div class="education-card">
-                        <div class="year-badge">2019-2022</div>
-                        <h3>Bachelor of Science</h3>
-                        <p>Dr. RMLA University, Ayodhya</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section class="experience-section">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fas fa-briefcase"></i>
-                    Experience
-                </h2>
-                <div class="experience-card">
-                    <div class="company-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="experience-details">
-                        <h3>Web Development Intern</h3>
-                        <h4>Utsav Foundation, Gurugram</h4>
-                        <p class="duration">January 2024 - July 2024</p>
-                        <ul class="responsibilities">
-                            <li>Developed full-stack NGO website using PHP, JavaScript, and MySQL</li>
-                            <li>Implemented RESTful APIs and secure authentication systems</li>
-                            <li>Deployed production-ready website via Hostinger</li>
-                            <li>Created admin dashboards and improved operational efficiency</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications Section -->
-        <section class="certifications-section">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fas fa-award"></i>
-                    Certifications
-                </h2>
-                <div class="certifications-grid">
-                    <div class="cert-card">
-                        <i class="fas fa-certificate"></i>
-                        <h3>Introduction to Internet of Things</h3>
-                        <p>NPTEL - IIT Madras</p>
-                    </div>
-                    <div class="cert-card">
-                        <i class="fas fa-certificate"></i>
-                        <h3>Privacy and Security in Online Social Media</h3>
-                        <p>NPTEL - IIT Madras</p>
-                    </div>
-                    <div class="cert-card">
-                        <i class="fas fa-certificate"></i>
-                        <h3>Soft Skills Certification</h3>
-                        <p>NPTEL</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section" id="contact">
-            <div class="section-container">
-                <h2 class="section-title">
-                    <i class="fas fa-envelope"></i>
-                    Get In Touch
-                </h2>
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Location</h3>
-                        <p>Gurugram, Haryana<br>India</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <h3>Phone</h3>
-                        <p>+91 9792846609</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-download"></i>
-                        <h3>Resume</h3>
-                        <a href="#" class="download-link" onclick="downloadCV()">Download CV</a>
-                    </div>
-                </div>
-                
-                <div class="social-section">
-                    <p>Connect with me</p>
-                    <div class="social-links">
-                        <a href="https://linkedin.com/in/ayushi-mishra-513953380" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/AyushiMishra" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:ayushitmishra@gmail.com" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <button class="cta-button" onclick="openGitHub()">
-                    View Complete Portfolio on GitHub
-                </button>
-            </div>
-        </section>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <button class="nav-button" onclick="goBack()">
-            <i class="fas fa-arrow-left"></i>
+        
+        <button class="portfolio-btn" onclick="window.open('https://github.com/AyushiMishra', '_blank')">
+            VIEW COMPLETE PORTFOLIO ON GITHUB
         </button>
-        <button class="nav-button home-button" onclick="goToTop()">
-            <i class="fas fa-home"></i>
-        </button>
-        <button class="nav-button" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
-    </nav>
+    </section>
 
     <script src="script.js"></script>
 </body>
