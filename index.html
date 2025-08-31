@@ -3,47 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayushi Mishra | GitHub Portfolio</title>
+  <title>Ayushi Mishra | Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Header / Navigation -->
   <header>
     <h1>Ayushi Mishra</h1>
     <nav>
       <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#resume">Resume</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
     <button id="theme-toggle">Toggle Theme</button>
   </header>
 
-  <section class="hero section">
-    <h2>Full Stack Developer</h2>
-    <p></p>
-    <a href="resume.pdf" download class="resume-btn">Download Resume</a>
+  <!-- Hero Section -->
+  <section id="home" class="hero section">
+    <h2>Hello, I'm Ayushi Mishra</h2>
+    <p class="hero-text"></p>
+    <a href="resume.pdf" class="resume-btn" download>Download Resume</a>
   </section>
 
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-container">
+      <div class="skill">
+        <p>HTML / CSS</p>
+        <div class="skill-bar"><span style="width: 95%"></span></div>
+      </div>
+      <div class="skill">
+        <p>JavaScript</p>
+        <div class="skill-bar"><span style="width: 90%"></span></div>
+      </div>
+      <div class="skill">
+        <p>UI/UX Design</p>
+        <div class="skill-bar"><span style="width: 88%"></span></div>
+      </div>
+      <div class="skill">
+        <p>Responsive Design</p>
+        <div class="skill-bar"><span style="width: 92%"></span></div>
+      </div>
+      <div class="skill">
+        <p>Canva Design</p>
+        <div class="skill-bar"><span style="width: 85%"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-container">
+      <img src="profile.jpg" alt="Profile Image" class="profile-img">
+      <div class="about-text">
+        <p>With 1.4 years of hands-on experience in web design and graphic design, I specialize in creating visually engaging and user-friendly digital content. Proficient in HTML, CSS, responsive design, and Canva for crafting impactful graphics, social media visuals, and branding materials.</p>
+        <ul>
+          <li><strong>Profile:</strong> Web & Graphic Designer</li>
+          <li><strong>Domain:</strong> Web Design, Visual Content, Social Media Graphics</li>
+          <li><strong>Education:</strong> Bachelor of Engineering, MCA</li>
+          <li><strong>Languages:</strong> English, Hindi</li>
+          <li><strong>Tools:</strong> Canva, HTML, CSS, JS, Bootstrap, WordPress</li>
+          <li><strong>Interest:</strong> Creative Design, UI Inspiration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section id="resume" class="section">
+    <h2 class="section-title">Resume</h2>
+    <div class="resume-container">
+      <h3>Experience</h3>
+      <p><strong>Web Designer - Merkle (2024-2025)</strong>: Built responsive landing pages, designed web assets, collaborated with marketing & dev teams.</p>
+      <p><strong>Internship - Web Design & Development Intern (2024)</strong>: Built responsive websites, designed user-friendly interfaces, learned modern web standards.</p>
+      <h3>Education</h3>
+      <p>B.Sc. Computer Science (2018-2021), MCA (2022-2024)</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
   <section id="projects" class="section">
     <h2 class="section-title">Projects</h2>
-
     <div class="controls">
       <input type="text" id="search-bar" placeholder="Search projects by name...">
       <select id="language-filter">
         <option value="all">All Languages</option>
       </select>
-
       <select id="sort-filter">
         <option value="updated">Recently Updated</option>
         <option value="stars">Most Stars</option>
         <option value="forks">Most Forks</option>
       </select>
     </div>
+    <div class="cards" id="projects-cards"></div>
+  </section>
 
-    <div class="cards" id="projects-cards">
-      <!-- JS will inject GitHub repos here -->
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-container">
+      <p><strong>Address:</strong> Haridwar, Uttarakhand</p>
+      <p><strong>Phone:</strong> +91 7895045749</p>
+      <p><strong>Email:</strong> ayushitmishra@gmail.com</p>
+      <div class="social-links">
+        <a href="https://github.com/AyushiMishra-a11y" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/ayushi-mishra-513953380" target="_blank">LinkedIn</a>
+      </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     © 2025 Ayushi Mishra | All Rights Reserved
   </footer>
@@ -51,4 +126,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
