@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayushi Mishra | GitHub Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Ayushi Mishra</h1>
+    <nav>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+      </ul>
+    </nav>
+    <button id="theme-toggle">Toggle Theme</button>
+  </header>
+
+  <section class="hero section">
+    <h2>Full Stack Developer</h2>
+    <p></p>
+    <a href="resume.pdf" download class="resume-btn">Download Resume</a>
+  </section>
+
+  <section id="projects" class="section">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="controls">
+      <input type="text" id="search-bar" placeholder="Search projects by name...">
+      <select id="language-filter">
+        <option value="all">All Languages</option>
+      </select>
+
+      <select id="sort-filter">
+        <option value="updated">Recently Updated</option>
+        <option value="stars">Most Stars</option>
+        <option value="forks">Most Forks</option>
+      </select>
+    </div>
+
+    <div class="cards" id="projects-cards">
+      <!-- JS will inject GitHub repos here -->
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Ayushi Mishra | All Rights Reserved
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
